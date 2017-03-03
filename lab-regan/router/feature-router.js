@@ -25,19 +25,28 @@ featureRouter.get('/api/feature/:id', function(req, res, next){
   .catch(err => next(createError(404, err.message)));
 });//end get
 
-featureRouter.put('/api/feature/:id/:name', jsonParser, function(req, res, next){
-  debug('PUT: /api/feature/:id/:name');
-  Feature.findByIdAndUpdate(req.params.id, {$set: {req.params.name} }, {new: true})
-  .then( new => res.json(new))
+// featureRouter.put('/api/feature/:id/:name', jsonParser, function(req, res, next){
+//   debug('PUT: /api/feature/:id/:name');
+//   Feature.findByIdAndUpdate(req.params.id, {$set: {req.params.name} }, {new: true})
+//   .then( new => res.json(new))
+//   .catch(next);
+// });//end put
+
+
+featureRouter.put('/api/feature/:id', jsonParser, function(req, res, next){
+  debug('PUT: /api/feature/:id');
+  Product.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then( feature => res.json(feature))
   .catch(next);
 });//end put
 
-featureRouter.delete('/api/feature/:id', jsonParser, function(req, res, next){
-  debug('DELETE: /api/feature/:id');
-  Feature.findByIdAndRemove(req.params.id)
-  .then( new => res.json(new))
-  .catch(next);
-});//end put
+
+// featureRouter.delete('/api/feature/:id', jsonParser, function(req, res, next){
+//   debug('DELETE: /api/feature/:id');
+//   Product.findByIdAndRemove(req.params.id)
+//   .then( new => res.json(new))
+//   .catch(next);
+// });//end put
 
 
 

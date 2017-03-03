@@ -31,5 +31,5 @@ Product.findByIdAndAddFeat = function(id, feature){
   })
   .then( () => {
     return this.tempFeature;
-  })
-}
+  });
+};

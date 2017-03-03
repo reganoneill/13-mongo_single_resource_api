@@ -21,6 +21,8 @@ const exampleProduct = {
   name: 'sponge gloves'
 };
 
+
+
 describe('Feature Routes', function() {
   describe('POST: /api/feature/:productID/feature', function() {
     describe('with a valid product id and feature body', () => {
@@ -43,7 +45,7 @@ describe('Feature Routes', function() {
       });
 
       it('should return a feature', done => {
-        request.post(`${url}/api/list/${this.tempProduct.id}/feature`)
+        request.post(`${url}/api/product/${this.tempProduct._id}/feature`)
         .send(exampleFeature)
         .end((err, res) => {
           if (err) return done(err);
