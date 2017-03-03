@@ -7,6 +7,10 @@ const Promise = require('bluebird');
 const debug = require('debug')('product:server');
 const mongoose = require('mongoose');
 const proRouter = require('./router/product-router.js');
+const featureRouter = require('./router/feature-router.js');
+
+const errors = require('./lib/error-middleware.js');
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,6 +23,8 @@ mongoose.connect(MONGODB_URI);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(proRouter);
+app.use(featureRouter);
+app.use(errors);
 app.listen(PORT, () => {
   console.log(`Server up and running on port ${PORT}.`);
 });

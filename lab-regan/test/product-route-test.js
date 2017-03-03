@@ -16,7 +16,7 @@ const exampleProduct = {
   name: 'sponge gloves'
 };
 
-describe('List Routes', function(){
+describe('Product Routes', function(){
   describe('POST: /api/product', function(){
     describe('with a valid body', function(){
       after( done => {

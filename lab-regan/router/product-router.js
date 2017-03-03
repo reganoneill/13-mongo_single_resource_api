@@ -2,11 +2,11 @@
 
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-const Product = require('../model/product.js');
 const Promise = require('bluebird');
 const createError = require('http-errors');
 const debug = require('debug')('product:product-router');
 
+const Product = require('../model/product.js');
 const productRouter = module.exports = new Router();
 
 productRouter.post('/api/product', jsonParser, function(req, res, next){
