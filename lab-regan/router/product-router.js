@@ -7,7 +7,6 @@ const Promise = require('bluebird');
 const createError = require('http-errors');
 const debug = require('debug')('product:product-router');
 
-
 const productRouter = module.exports = new Router();
 
 productRouter.post('/api/product', jsonParser, function(req, res, next){
@@ -23,8 +22,6 @@ productRouter.post('/api/product', jsonParser, function(req, res, next){
   .then( product => res.json(product))
   .catch(next);
 });//end post
-
-
 productRouter.get('/api/product/:id', function(req, res, next){
   debug('GET: /api/product/:id');
   Product.findById(req.params.id)
@@ -33,16 +30,16 @@ productRouter.get('/api/product/:id', function(req, res, next){
     res.status(404).send('Not Found');
     next;
   });
-});
+});//end get
 productRouter.put('/api/product/:id/:name', jsonParser, function(req, res, next){
   debug('PUT: /api/product/:id/:name');
   Product.findByIdAndUpdate(req.params.id, { $set: {name: req.params.name}}, {new:true})
   .then( product => res.json(product))
   .catch(next);
-});
+});//end put
 productRouter.delete('/api/product/:id', function(req, res, next){
   debug('DELETE: /api/product/:id');
   Product.findByIdAndRemove(req.params.id)
   .then( removed => res.json(removed))
   .catch(next);
-});
+});//end delete
