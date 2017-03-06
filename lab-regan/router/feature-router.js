@@ -20,17 +20,22 @@ featureRouter.post('/api/product/:productID/feature', jsonParser, function(req, 
 
 featureRouter.get('/api/feature/:id', function(req, res, next){
   debug('GET: /api/feature/:id');
-  Feature.findById(req.body.id)
+  Feature.findById(req.params.id)
   .then( feature => res.json(feature) )
   .catch(err => next(createError(404, err.message)));
 });//end get
 
-featureRouter.put('/api/feature/:id/:name', jsonParser, function(req, res, next){
-  debug('PUT: /api/feature/:id/:name');
-  Feature.findByIdAndUpdate(req.params.id, {$set: {req.params.name} }, {new: true})
-  .then( new => res.json(new))
+featureRouter.put('/api/feature/:id/update', jsonParser, function(req, res, next){
+  debug('PUT: /api/feature/:id/update');
+  Feature.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then( feature => {
+    // debug('below is the returned feature:');
+    //  debug(feature);
+      res.json(feature)
+    })
   .catch(next);
 });//end put
+
 
 featureRouter.delete('/api/feature/:id', jsonParser, function(req, res, next){
   debug('DELETE: /api/feature/:id');
@@ -38,7 +43,3 @@ featureRouter.delete('/api/feature/:id', jsonParser, function(req, res, next){
   .then( new => res.json(new))
   .catch(next);
 });//end put
-
-
-
-// Create GET, √POST√, PUT, and DELETE routes for your newly added resource

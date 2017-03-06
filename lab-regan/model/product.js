@@ -22,7 +22,9 @@ Product.findByIdAndAddFeat = function(id, feature){
   .then( product => {
       feature.productID = product._id;
       this.tempProduct = product;
-      return new Feature(feature).save();
+      // return new Feature(feature).save();
+      let tempFeature = new Feature(feature).save();
+      return tempFeature;
   })
   .then( feature => {
     this.tempProduct.features.push(feature._id);
