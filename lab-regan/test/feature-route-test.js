@@ -131,4 +131,41 @@ describe('Feature Routes', function() {
   });//end put test
 
 
+
+
+  describe('DELETE: /api/feature/:productID/:featID', function(){
+    describe('with a valid id', function(){
+      before( done => {
+        new Product(exampleProduct).save()
+        .then( product => {
+          this.tempProduct = product;
+          return Product.findByIdAndAddFeat(this.tempProduct.id, exampleFeature)
+        })
+        .then( feature => {
+          this.feature = feature;
+          done();
+        })
+        .catch(done);
+      });
+      after( done => {
+        Promise.all([
+          Product.remove({}),
+          Feature.remove({})
+        ])
+        .then(() => done())
+        .catch(done);
+      });
+      it('should return an updated array without our deleted feature id', done => {
+        request.delete(`${url}/feature/${this.feature.productID}/${this.feature.id}`).end((err, res) => {
+          debug(err.message);
+          expect(res.status).to.equal(200);
+        });
+      });
+    });
+  });
+
+
+
+
+
 });//end feature test routes

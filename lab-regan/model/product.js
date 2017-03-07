@@ -36,19 +36,19 @@ Product.findByIdAndAddFeat = function(id, feature){
   })
 };//end findByIdAndAddFeat
 
-// Product.findByIdAndRemoveFeat(id, featureId){
-//   debug('findByIdAndRemoveFeat');
-//   return Product.findById(id)
-//   .catch(err => Promise.reject(createError(404, err.message)))
-//   .then( product => {
-//     //rework this stuff
-//     // feature.ProductID = product._id;
-//     // this.tempProduct = product;
-//     // let tempFeature = new Feature(feature).save();
-//     // return tempFeature;
-//   })
-//   .then( feature => {
-    //now find the feature ID in the productID array and remove it, then update it
-
-  //})
-//};//end findByIdAndRemoveFeat
+Product.findByIdAndRemoveFeat = function(id, featureId){
+  debug('findByIdAndRemoveFeat');
+  return Product.findById(id)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( product => {
+    for(var i = 0; i <= product.features.length; i++){
+      if(product.features[i] === featureId){
+        debug('START');
+        debug(product.features[i]);
+        debug(featureId);
+        product.features.splice(i, 1);
+        return;
+      };
+    };
+  });
+};//end findByIdAndRemoveFeat

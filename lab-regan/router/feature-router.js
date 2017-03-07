@@ -36,10 +36,13 @@ featureRouter.put('/api/feature/:id/update', jsonParser, function(req, res, next
   .catch(next);
 });//end put
 
-// 
-// featureRouter.delete('/api/feature/:id', jsonParser, function(req, res, next){
-//   debug('DELETE: /api/feature/:id');
-//   Feature.findByIdAndRemove(req.params.id)
-//   .then( new => res.json(new))
-//   .catch(next);
-// });//end put
+featureRouter.delete('/api/feature/:productID/:featID', jsonParser, function(req, res, next){
+  debug('DELETE: /api/feature/:productID/:featID');
+
+  Product.findByIdAndRemoveFeat(req.params.productID, req.params.featID )
+  .then( product => res.json(product.features))
+  .catch(err => next(createError(490, 'terrible!')));
+  // Feature.findByIdAndRemove(req.params.id)
+  // .then( new => res.json(new))
+  // .catch(next);
+});//end put
