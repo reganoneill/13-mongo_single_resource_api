@@ -34,4 +34,21 @@ Product.findByIdAndAddFeat = function(id, feature){
   .then( () => {
     return this.tempFeature;
   })
-}
+};//end findByIdAndAddFeat
+
+// Product.findByIdAndRemoveFeat(id, featureId){
+//   debug('findByIdAndRemoveFeat');
+//   return Product.findById(id)
+//   .catch(err => Promise.reject(createError(404, err.message)))
+//   .then( product => {
+//     //rework this stuff
+//     // feature.ProductID = product._id;
+//     // this.tempProduct = product;
+//     // let tempFeature = new Feature(feature).save();
+//     // return tempFeature;
+//   })
+//   .then( feature => {
+    //now find the feature ID in the productID array and remove it, then update it
+
+  //})
+//};//end findByIdAndRemoveFeat
